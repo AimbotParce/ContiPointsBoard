@@ -30,7 +30,7 @@ export default function PlayerForm() {
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addPlayer()}
           placeholder="Player name"
-          className="flex-1 min-w-0 px-4 py-3 text-base rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 min-w-0 px-4 py-3 text-base rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           autoFocus
         />
         <button
@@ -47,7 +47,7 @@ export default function PlayerForm() {
           {state.players.map((player, i) => (
             <li
               key={player.id}
-              className="flex items-center justify-between px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800"
+              className="flex items-center justify-between px-4 py-3 rounded-lg bg-gray-100"
             >
               <span className="text-base">
                 {i + 1}. {player.name}
@@ -56,7 +56,7 @@ export default function PlayerForm() {
                 onClick={() =>
                   dispatch({ type: "REMOVE_PLAYER", id: player.id })
                 }
-                className="w-8 h-8 flex items-center justify-center rounded-full text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700 active:bg-gray-300"
+                className="w-8 h-8 flex items-center justify-center rounded-full text-gray-500 hover:bg-gray-200 active:bg-gray-300"
                 aria-label={`Remove ${player.name}`}
               >
                 X

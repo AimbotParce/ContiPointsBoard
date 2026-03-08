@@ -88,8 +88,8 @@ export default function PointEntryForm() {
               key={player.id}
               className={`flex items-center gap-3 p-3 rounded-lg border ${
                 isWinner
-                  ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-                  : "border-gray-200 dark:border-gray-700"
+                  ? "border-green-500 bg-green-50"
+                  : "border-gray-200"
               }`}
             >
               <button
@@ -98,7 +98,7 @@ export default function PointEntryForm() {
                 className={`flex-shrink-0 w-10 h-10 rounded-full border-2 flex items-center justify-center text-sm font-bold ${
                   isWinner
                     ? "border-green-500 bg-green-500 text-white"
-                    : "border-gray-300 dark:border-gray-600 text-gray-400"
+                    : "border-gray-300 text-gray-400"
                 }`}
                 aria-label={`Select ${player.name} as winner`}
               >
@@ -120,8 +120,8 @@ export default function PointEntryForm() {
                 placeholder="0"
                 className={`flex-1 min-w-0 px-3 py-2 text-base text-right rounded-lg border ${
                   isWinner
-                    ? "bg-green-100 dark:bg-green-900/40 border-green-300 dark:border-green-700 text-green-700 dark:text-green-300"
-                    : "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+                    ? "bg-green-100 border-green-300 text-green-700"
+                    : "bg-white border-gray-300"
                 } focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed`}
               />
             </div>
@@ -130,9 +130,9 @@ export default function PointEntryForm() {
       </div>
 
       {errors.length > 0 && (
-        <div className="p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+        <div className="p-3 rounded-lg bg-red-50 border border-red-200">
           {errors.map((err, i) => (
-            <p key={i} className="text-sm text-red-600 dark:text-red-400">
+            <p key={i} className="text-sm text-red-600">
               {err}
             </p>
           ))}
@@ -142,7 +142,7 @@ export default function PointEntryForm() {
       <div className="flex gap-3">
         <button
           onClick={() => dispatch({ type: "CANCEL_ENTRY" })}
-          className="flex-1 py-3 text-base rounded-lg border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 active:bg-gray-100 dark:active:bg-gray-800"
+          className="flex-1 py-3 text-base rounded-lg border border-gray-300 text-gray-600 active:bg-gray-100"
         >
           Cancel
         </button>

@@ -20,11 +20,11 @@ export default function ScoreTable() {
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="overflow-x-auto rounded-lg border border-gray-200">
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-gray-100 dark:bg-gray-800">
-              <th className="sticky left-0 bg-gray-100 dark:bg-gray-800 px-3 py-3 text-left font-semibold min-w-[70px]">
+            <tr className="bg-gray-100">
+              <th className="sticky left-0 bg-gray-100 px-3 py-3 text-left font-semibold min-w-[70px]">
                 Round
               </th>
               <th className="px-2 py-3 text-center font-semibold min-w-[50px]">
@@ -44,9 +44,9 @@ export default function ScoreTable() {
             {rounds.map((round) => (
               <tr
                 key={round.roundNumber}
-                className="border-t border-gray-200 dark:border-gray-700"
+                className="border-t border-gray-200"
               >
-                <td className="sticky left-0 bg-white dark:bg-gray-900 px-3 py-2 font-medium">
+                <td className="sticky left-0 bg-white px-3 py-2 font-medium">
                   {round.roundNumber}
                 </td>
                 <td className="px-2 py-2 text-center text-xs text-gray-500">
@@ -60,7 +60,7 @@ export default function ScoreTable() {
                       key={p.id}
                       className={`px-3 py-2 text-center ${
                         isWinner
-                          ? "text-green-600 dark:text-green-400 font-semibold"
+                          ? "text-green-600 font-semibold"
                           : ""
                       }`}
                     >
@@ -72,8 +72,8 @@ export default function ScoreTable() {
             ))}
 
             {/* Current round placeholder */}
-            <tr className="border-t border-dashed border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50">
-              <td className="sticky left-0 bg-gray-50 dark:bg-gray-800/50 px-3 py-2 font-medium text-gray-400">
+            <tr className="border-t border-dashed border-gray-300 bg-gray-50">
+              <td className="sticky left-0 bg-gray-50 px-3 py-2 font-medium text-gray-400">
                 {currentRound}
               </td>
               <td className="px-2 py-2 text-center text-xs text-gray-400">
@@ -82,7 +82,7 @@ export default function ScoreTable() {
               {players.map((p) => (
                 <td
                   key={p.id}
-                  className="px-3 py-2 text-center text-gray-300 dark:text-gray-600"
+                  className="px-3 py-2 text-center text-gray-300"
                 >
                   -
                 </td>
@@ -90,8 +90,8 @@ export default function ScoreTable() {
             </tr>
 
             {/* Totals */}
-            <tr className="border-t-2 border-gray-300 dark:border-gray-600 font-bold">
-              <td className="sticky left-0 bg-white dark:bg-gray-900 px-3 py-3">
+            <tr className="border-t-2 border-gray-300 font-bold">
+              <td className="sticky left-0 bg-white px-3 py-3">
                 Total
               </td>
               <td></td>
@@ -103,7 +103,7 @@ export default function ScoreTable() {
                     key={p.id}
                     className={`px-3 py-3 text-center ${
                       isLowest
-                        ? "text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20"
+                        ? "text-green-600 bg-green-50"
                         : ""
                     }`}
                   >
@@ -125,7 +125,7 @@ export default function ScoreTable() {
         </button>
         <button
           onClick={handleReset}
-          className="w-full py-3 text-sm rounded-lg border border-gray-300 dark:border-gray-600 text-gray-500 active:bg-gray-100 dark:active:bg-gray-800"
+          className="w-full py-3 text-sm rounded-lg border border-gray-300 text-gray-500 active:bg-gray-100"
         >
           Reset Game
         </button>
