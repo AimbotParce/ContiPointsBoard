@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: aimbotparce/conti-points-board
+  IMAGE_NAME: ${{ github.repository_owner }}/conti-points-board
 
 jobs:
   build-and-push:
