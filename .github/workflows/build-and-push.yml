@@ -3,18 +3,25 @@ name: Build and push to GHCR
 on:
   push:
     branches: [main]
+    # App-code changes only. Infra, CI config and docs don't rebuild the image.
+    paths-ignore:
+      - "infra/**"
+      - ".github/**"
+      - "*.md"
+  # Allow seeding the first image (or a manual rebuild) without an app change.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+  pull-requests: write
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/conti-points-board
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
       - uses: actions/checkout@v4
 
@@ -27,21 +34,32 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=sha
-            type=raw,value=latest
+      - name: Compute image ref
+        id: img
+        run: |
+          # GHCR repository names must be lowercase.
+          OWNER="${GITHUB_REPOSITORY_OWNER,,}"
+          echo "image=${REGISTRY}/${OWNER}/conti-points-board" >> "$GITHUB_OUTPUT"
+          echo "tag=sha-${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
 
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: |
+            ${{ steps.img.outputs.image }}:${{ steps.img.outputs.tag }}
+            ${{ steps.img.outputs.image }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Update image-versions.yaml
+        run: yq -i ".image = \"${{ steps.img.outputs.image }}:${{ steps.img.outputs.tag }}\"" infra/image-versions.yaml
+
+      - name: Create PR with updated image tag
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore: update image to ${{ steps.img.outputs.tag }}"
+          branch: deploy/image-${{ steps.img.outputs.tag }}
+          title: "Deploy: update image to ${{ steps.img.outputs.tag }}"
+          body: "Automated PR to update the container image tag after a successful build."
