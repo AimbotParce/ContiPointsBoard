@@ -1,3 +1,3 @@
 # Pinned image, updated by the build workflow (.github/workflows/build-and-push.yml)
 # on push to main. GHCR repository names must be lowercase.
-image: ghcr.io/aimbotparce/conti-points-board:latest
+image: ghcr.io/aimbotparce/conti-points-board:sha-615556352b06
