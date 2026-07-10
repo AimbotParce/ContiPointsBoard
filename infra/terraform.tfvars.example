@@ -1,0 +1,13 @@
+# For out-of-cluster runs only (e.g. applying from a laptop). Leave unset when
+# running in CI on the in-cluster runner -- Terraform then uses in-cluster
+# config (the runner pod's ci-deploy ServiceAccount) automatically.
+# kubeconfig_path = "~/.kube/config"
+
+# Namespace (provisioned by HomeInfra; default: "conti-points-board")
+# namespace = "conti-points-board"
+
+# Tailscale hostname (default: "conti"); app at https://<hostname>.<tailnet>.ts.net
+# tailscale_hostname = "conti"
+
+# The image tag is read from image-versions.yaml (updated by the build workflow
+# on push to main).
