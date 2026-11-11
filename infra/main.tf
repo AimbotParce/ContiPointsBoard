@@ -55,6 +55,15 @@ resource "kubernetes_deployment_v1" "app" {
             initial_delay_seconds = 10
             period_seconds        = 10
           }
+          resources {
+            requests = {
+              cpu    = "25m"
+              memory = "64Mi"
+            }
+            limits = {
+              memory = "256Mi"
+            }
+          }
         }
       }
     }
